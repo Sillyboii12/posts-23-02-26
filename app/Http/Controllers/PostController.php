@@ -30,13 +30,13 @@ class PostController extends Controller
 
     public function posts()
     {
-        $posts = Post::get();
+        $posts = Post::all();
         return view('posts.index', compact('posts'));
     }
 
     public function view($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::find($id);
         return view('posts.view', compact('post'));
     }
 }
