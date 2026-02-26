@@ -25,18 +25,38 @@ class PostController extends Controller
         $title = $validated["title"];
         $content = $validated["content"];
 
-        return view('posts.post', ['title' => $title, 'content' => $content]);
+        return "<h1>Success</h1>";
     }
 
-    public function posts()
+    public function index()
     {
         $posts = Post::all();
         return view('posts.index', compact('posts'));
     }
 
-    public function view($id)
+    public function show($id)
     {
         $post = Post::find($id);
-        return view('posts.view', compact('post'));
+        return view('posts.show', compact('post'));
     }
+    public function edit($id)
+    {
+        $post = Post::find($id);
+        return view('posts.edit', compact('post'));
+    }
+    public function update(Request $request, $id)
+    {
+        $post = Post::find($id);
+
+        $request->validate([
+        'title' => 'required',
+        'content' => 'required',
+        ]);
+
+        $post->update($request->all());
+
+        return "<h1>Succes</h1>" . '<a href="/posts">Return to all posts</a>';
+    }
+
+
 }
