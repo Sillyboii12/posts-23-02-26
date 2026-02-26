@@ -7,23 +7,18 @@
 </head>
 <body>
     <h1>Edit Post</h1>
-
-    <h2>{{$post->title}}</h2>
-    <p>{{$post->content}}</p>
-
-
     <form action="/post/edit/{{$post->id}}" method="post">
         @csrf
         <div>
             <label for="title">Title: </label>
-            <input type="text" name="title" id="title">
+            <input type="text" name="title" id="title" value="{{$post->title}}">
         </div>
         <div>
             <label for="content">Content: </label>
-            <textarea name="content" id="content"></textarea>
+            <textarea name="content" id="content">{{$post->content}}</textarea>
         </div>
         <div>
-            <button>Submit</button>
+            <button>Confirm</button>
         </div>
     </form>
 </body>

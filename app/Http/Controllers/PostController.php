@@ -25,7 +25,7 @@ class PostController extends Controller
         $title = $validated["title"];
         $content = $validated["content"];
 
-        return "<h1>Success</h1>";
+        return "<h1>Succes</h1>" . '<a href="/posts">Return to all posts</a>';
     }
 
     public function index()
@@ -49,14 +49,24 @@ class PostController extends Controller
         $post = Post::find($id);
 
         $request->validate([
-        'title' => 'required',
-        'content' => 'required',
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
         ]);
-
         $post->update($request->all());
+
 
         return "<h1>Succes</h1>" . '<a href="/posts">Return to all posts</a>';
     }
 
+    public function delete($id)
+    {
+        $post = Post::find($id);
+        return view('posts.delete', ["post" => $post]);
+    }
 
+    public function destroy($id)
+    {
+        Post::destroy($id);
+        return "<h1>Post deleted</h1>". '<a href="/posts">Return to all posts</a>';
+    }
 }

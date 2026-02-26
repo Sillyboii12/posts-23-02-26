@@ -8,11 +8,13 @@
 <body>
 
     <ul>
+
         <a href="posts/create">Create a post.</a>
     @foreach ($posts as $post)
         <div><h2>{{ $post->title }}</h2> <p>{{ $post->content}}</p></div>
         <a href="/post/{{$post->id}}">Show</a>
         <a href="/post/edit/{{$post->id}}">Edit</a>
+        <a href="/post/delete/{{$post->id}}">Delete</a>
     @endforeach
     </ul>
 </body>
